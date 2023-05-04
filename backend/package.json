@@ -2,12 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "type": "module",
+  "main": "./build/index.js",
   "scripts": {
     "start": "node ./build/index.js",
     "dev": "nodemon -I --exec node --experimental-specifier-resolution=node  --loader ts-node/esm ./src/index.ts",
-    "build": "npx tsc",
+    "build": "tsc",
     "postinstall": "npm run build"
   },
   "keywords": [],
@@ -26,5 +25,8 @@
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.0.4"
+  },
+  "engines": {
+    "node": "16.x"
   }
 }

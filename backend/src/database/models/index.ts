@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { IWorkout } from "../../types/index.js";
+import { IWorkout } from "../../types";
 
 
 const workoutSchema = new Schema<IWorkout>({

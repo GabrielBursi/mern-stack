@@ -1,6 +1,6 @@
 import { Request, RequestHandler } from "express";
-import { Param } from "../types/index.js";
-import { WorkoutsProviders } from "../database/Providers/index.js";
+import { Param } from "../types";
+import { WorkoutsProviders } from "../database/Providers";
 
 export const DeleteById: RequestHandler = async (req: Request<Param>, res) => {
     const { id } = req.params

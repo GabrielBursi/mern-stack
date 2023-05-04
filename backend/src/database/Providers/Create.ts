@@ -1,5 +1,5 @@
-import { IWorkout } from "../../types/index.js"
-import { WorkoutModel } from "../models/index.js"
+import { IWorkout } from "../../types"
+import { WorkoutModel } from "../models"
 
 export const Create = async (workout: IWorkout) => {
     try {
