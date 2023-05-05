@@ -5,7 +5,7 @@
   "main": "./build/index.js",
   "scripts": {
     "start": "node ./build/index.js",
-    "dev": "nodemon -I --exec node --experimental-specifier-resolution=node  --loader ts-node/esm ./src/index.ts",
+    "dev": "nodemon -I --exec node --experimental-specifier-resolution=node  --loader ts-node/esm ./index.ts",
     "build": "tsc",
     "postinstall": "npm run build"
   },

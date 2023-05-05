@@ -1,8 +1,8 @@
-import { UpdateById } from './UpdateById.js';
-import { Create } from './Create.js';
-import { GetById } from './GetById.js';
-import { GetAll } from './GetAll.js';
-import { DeleteById } from './DeleteById.js';
+import { UpdateById } from './UpdateById';
+import { Create } from './Create';
+import { GetById } from './GetById';
+import { GetAll } from './GetAll';
+import { DeleteById } from './DeleteById';
 
 export const  WorkoutsControllers = {
     GetAll,
