@@ -3,5 +3,5 @@ import { UsersControllers } from "../controllers";
 
 export const routerUsers = Router()
 
-routerUsers.post('/login', UsersControllers.loginUser)
-routerUsers.post('/signup', UsersControllers.signupUser)
+routerUsers.post('/login', UsersControllers.validationBodyUser, UsersControllers.loginUser)
+routerUsers.post('/signup', UsersControllers.validationBodyUser, UsersControllers.signupUser)

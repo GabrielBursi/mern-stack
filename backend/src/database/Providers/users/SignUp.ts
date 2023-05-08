@@ -1,12 +1,10 @@
-import bcrypt from 'bcrypt'
 import { UserModel } from "../../models";
 import { IUser } from "../../../types";
+import { PasswordCrypto } from '../../../shared/services';
 
 export const signup = async (user: IUser) => {
     try {
-
-        const salt = await bcrypt.genSalt(10)
-        const hash = await bcrypt.hash(user.password, salt)
+        const hash = await PasswordCrypto.hashPassword(user.password)
 
         const newUser = new UserModel({email: user.email, password: hash})
         await newUser.save()

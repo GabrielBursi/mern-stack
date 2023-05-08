@@ -1,4 +1,5 @@
 import { Request, RequestHandler } from "express";
+import { StatusCodes } from "http-status-codes";
 import { WorkoutsProviders } from "../../database/Providers";
 import { IWorkout, Param } from "../../types";
 
@@ -9,8 +10,12 @@ export const UpdateById: RequestHandler = async (req: Request<Param, {}, IWorkou
     const newWorkout = await WorkoutsProviders.Update(id || '', workout)
 
     if (newWorkout instanceof Error) {
-        return res.status(500).json({ error: newWorkout.message })
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            errors: {
+                default: newWorkout.message
+            }
+        });
     }
 
-    res.json(newWorkout)
+    res.status(StatusCodes.OK).json(newWorkout)
 }
