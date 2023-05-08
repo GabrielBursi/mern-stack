@@ -1,4 +1,4 @@
-import { WorkoutModel } from "../models";
+import { WorkoutModel } from "../../models";
 
 export const Delete = async (id: string) => {
     try {
