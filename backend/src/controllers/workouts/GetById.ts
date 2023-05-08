@@ -1,6 +1,6 @@
 import { Request, RequestHandler } from "express";
-import { WorkoutsProviders } from "../database/Providers";
-import { Param } from "../types";
+import { WorkoutsProviders } from "../../database/Providers";
+import { Param } from "../../types";
 
 export const GetById: RequestHandler = async (req: Request<Param>, res) => {
     const { id } = req.params

@@ -1,6 +1,6 @@
 import { Request, RequestHandler } from "express";
-import { WorkoutsProviders } from "../database/Providers";
-import { IWorkout, Param } from "../types";
+import { WorkoutsProviders } from "../../database/Providers";
+import { IWorkout, Param } from "../../types";
 
 export const UpdateById: RequestHandler = async (req: Request<Param, {}, IWorkout>, res) => {
     const { id } = req.params

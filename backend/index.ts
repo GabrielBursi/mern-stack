@@ -1,14 +1,15 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
-import { router } from './src/routes'
 import { connectDB } from './src/database'
+import { routerUsers, routerWorkouts } from './src/routes'
 
-const app = express()
 dotenv.config()
+const app = express()
 app.use(cors())
 app.use(express.json())
-app.use(router)
+app.use(routerWorkouts)
+app.use(routerUsers)
 
 connectDB().then(res => {
     if(res instanceof Error){

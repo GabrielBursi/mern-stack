@@ -7,3 +7,8 @@ export interface IWorkout {
 export interface Param {
     id?: string
 }
+
+export interface IUser {
+    email: string,
+    password: string
+}

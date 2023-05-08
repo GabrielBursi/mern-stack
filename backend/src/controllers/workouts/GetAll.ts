@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { WorkoutsProviders } from "../database/Providers";
+import { WorkoutsProviders } from "../../database/Providers";
 
 export const GetAll: RequestHandler = async (req, res) => {
     const workout = await WorkoutsProviders.GetAll()
