@@ -1,7 +1,5 @@
-/* google font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
 
-/* layout */
 :root {
   --primary: #1aac83;
   --error: #e7195a;
@@ -37,7 +35,6 @@ header a {
   margin: 0 auto;
 }
 
-/* homepage */
 .home {
   display: grid;
   grid-template-columns: 3fr 1fr;
@@ -73,7 +70,6 @@ header a {
   border-radius: 50%;
 }
 
-/* new workout form */
 label,
 input {
   display: block;
@@ -97,6 +93,7 @@ form button {
   font-family: "Poppins";
   border-radius: 4px;
   cursor: pointer;
+  text-transform: uppercase;
 }
 
 div.error {
@@ -110,4 +107,26 @@ div.error {
 
 input.error {
   border: 1px solid var(--error);
+}
+
+nav {
+  display: flex;
+  align-items: center;
+}
+
+nav a {
+  margin-left: 10px;
+}
+
+.active-page {
+  color: var(--primary);
+}
+
+form.signup,
+form.login {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 4px;
 }
