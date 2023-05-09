@@ -16,6 +16,8 @@ const Login = () => {
     useEffect(() => {
         setEmail('')
         setPassword('')
+        setError(null)
+        setIsLoading(false)
     }, [isSignUp]);
 
     const handleSubmit = async (e: FormEvent) => {
@@ -28,7 +30,7 @@ const Login = () => {
         let user = undefined
 
         if(isSignUp){
-            user = await UsersServices.Create({email, password})
+            user = await UsersServices.Create({ email, password })
         }
 
         if(!isSignUp){

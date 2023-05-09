@@ -12,6 +12,9 @@ export default function NavBar() {
     const { user, setUser } = useContext(UserContext)
 
     const handleLogout = () => {
+        const expireDate = new Date();
+        expireDate.setTime(expireDate.getTime() - 1);
+        document.cookie = `accessToken=; expires=${expireDate.toUTCString()}; path=/;`;
         localStorage.removeItem('user')
         setIsSignUp(false)
         setUser(null)
@@ -21,7 +24,7 @@ export default function NavBar() {
     return (
         <header>
             <div className="container">
-                <Link href="/">
+                <Link href={user ? '/' : ''}>
                     <h1>Parceiro de Treino</h1>
                 </Link>
                 <nav>

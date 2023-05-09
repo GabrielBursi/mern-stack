@@ -47,8 +47,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const workouts = await WorkoutServices.GetAll(accessToken);
   const hasError = true;
 
-  console.log(accessToken);
-
   if (workouts instanceof Error) {
     return {
       props: {
