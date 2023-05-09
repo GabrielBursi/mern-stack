@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { AiOutlineDelete } from 'react-icons/ai'
 import { WorkoutServices } from '@/services/api'
 import { IWorkout } from '@/types'
+import { UserContext } from '@/context'
 
 interface WorkoutDetailsProps {
     workout: IWorkout,
@@ -11,9 +12,10 @@ interface WorkoutDetailsProps {
 export default function WorkoutDetails({workout, handleWorkoutDeleted}: WorkoutDetailsProps) {
 
     const [error, setError] = useState<string>();
+    const { user } = useContext(UserContext)
 
     const handleDelete = async () => {
-        const response = await WorkoutServices.DeleteById(workout._id)
+        const response = await WorkoutServices.DeleteById(workout._id, user?.accessToken)
 
         if (response instanceof Error) {
             setError(response.message)

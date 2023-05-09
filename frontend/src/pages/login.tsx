@@ -41,8 +41,12 @@ const Login = () => {
             return
         }
 
+        const expireDate = new Date();
+        expireDate.setTime(expireDate.getTime() + (24 * 60 * 60 * 1000));
+
         if(user){
             localStorage.setItem('user', JSON.stringify(user))
+            document.cookie = `accessToken=${JSON.stringify(user.accessToken)}; expires=${expireDate.toUTCString()}; path=/`;
             setUser(user)
             setIsLoading(false)
             router.push('/')

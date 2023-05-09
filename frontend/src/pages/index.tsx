@@ -1,9 +1,10 @@
-import { GetStaticProps } from "next"
-import { useState } from "react";
+import { GetServerSideProps } from "next"
+import { useContext, useState } from "react";
 import { IWorkout } from "@/types";
 import WorkoutDetails from "@/components/WorkoutDetails";
 import WorkoutForm from "@/components/WorkoutForm";
 import { WorkoutServices } from "@/services/api";
+import { UserContext } from "@/context";
 
 interface HomeProps {
   workouts: IWorkout[],
@@ -15,8 +16,10 @@ export default function Home({workouts, hasError}: HomeProps) {
   const [stateWorkouts, setStateWorkouts] = useState<IWorkout[]>(workouts);
   const [error, setError] = useState(hasError);
 
+  const { user } = useContext(UserContext)
+
   const handleWorkouts = async () => {
-    const updatedWorkouts = await WorkoutServices.GetAll();
+    const updatedWorkouts = await WorkoutServices.GetAll(user?.accessToken);
     if(updatedWorkouts instanceof Error){
       return setError(true)
     }
@@ -38,24 +41,25 @@ export default function Home({workouts, hasError}: HomeProps) {
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 
-  const workouts = await WorkoutServices.GetAll()
-  const hasError = true
+  const accessToken = req.cookies.accessToken;
+  const workouts = await WorkoutServices.GetAll(accessToken);
+  const hasError = true;
+
+  console.log(accessToken);
 
   if (workouts instanceof Error) {
     return {
       props: {
         hasError,
-      },
-      revalidate: 60
+      }
     }
   } 
 
   return {
     props:{
       workouts,
-    },
-    revalidate: 60
+    }
   }
 }

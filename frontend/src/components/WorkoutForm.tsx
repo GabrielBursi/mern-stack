@@ -1,6 +1,7 @@
-import React, { FormEvent, useState } from 'react'
+import React, { FormEvent, useContext, useState } from 'react'
 import { WorkoutServices } from '@/services/api';
 import { IWorkout } from '@/types'
+import { UserContext } from '@/context';
 
 interface WorkoutFormProps {
     handleWorkoutCreated: () => Promise<void>
@@ -11,6 +12,8 @@ export default function WorkoutForm({ handleWorkoutCreated }: WorkoutFormProps) 
     const [workout, setWorkout] = useState<Omit<IWorkout, '_id' | 'createdAt'>>({load: 0, reps: 0, title: ''});
     const [error, setError] = useState<string>()
 
+    const { user } = useContext(UserContext)
+
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
 
@@ -19,8 +22,7 @@ export default function WorkoutForm({ handleWorkoutCreated }: WorkoutFormProps) 
             load: Number(workout.load) , 
             reps: Number(workout.reps) 
         }
-
-        const response = await WorkoutServices.Create(newWorkout)
+        const response = await WorkoutServices.Create(newWorkout, user?.accessToken)
 
         if (response instanceof Error) {
             setError(response.message)
@@ -29,7 +31,6 @@ export default function WorkoutForm({ handleWorkoutCreated }: WorkoutFormProps) 
 
         setWorkout({ load: 0, reps: 0, title: '' })
         handleWorkoutCreated()
-
     }
 
     return (
