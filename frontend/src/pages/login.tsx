@@ -1,6 +1,7 @@
 import { useRouter } from "next/router"
-import { FormEvent, useEffect, useState } from "react"
+import { FormEvent, useContext, useEffect, useState } from "react"
 import { UsersServices } from "@/services/api"
+import { UserContext } from "@/context"
 
 const Login = () => {
     const [email, setEmail] = useState('')
@@ -10,6 +11,8 @@ const Login = () => {
     const router = useRouter()
     const isSignUp = router.query.isSignUp === 'true'
 
+    const { setUser } = useContext(UserContext)
+
     useEffect(() => {
         setEmail('')
         setPassword('')
@@ -18,7 +21,6 @@ const Login = () => {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
 
-        console.log('object');
 
         setIsLoading(true)
         setError(null)
@@ -39,9 +41,12 @@ const Login = () => {
             return
         }
 
-        localStorage.setItem('user', JSON.stringify(user?.accessToken))
-        setIsLoading(false)
-        console.log('acabou');
+        if(user){
+            localStorage.setItem('user', JSON.stringify(user))
+            setUser(user)
+            setIsLoading(false)
+            router.push('/')
+        }
     }
 
 

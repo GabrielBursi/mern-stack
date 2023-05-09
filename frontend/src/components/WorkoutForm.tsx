@@ -1,5 +1,5 @@
 import React, { FormEvent, useState } from 'react'
-import ApiServices from '@/services/api';
+import { WorkoutServices } from '@/services/api';
 import { IWorkout } from '@/types'
 
 interface WorkoutFormProps {
@@ -20,7 +20,7 @@ export default function WorkoutForm({ handleWorkoutCreated }: WorkoutFormProps) 
             reps: Number(workout.reps) 
         }
 
-        const response = await ApiServices.Create(newWorkout)
+        const response = await WorkoutServices.Create(newWorkout)
 
         if (response instanceof Error) {
             setError(response.message)

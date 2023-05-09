@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { AiOutlineDelete } from 'react-icons/ai'
-import ApiServices from '@/services/api'
+import { WorkoutServices } from '@/services/api'
 import { IWorkout } from '@/types'
 
 interface WorkoutDetailsProps {
@@ -13,7 +13,7 @@ export default function WorkoutDetails({workout, handleWorkoutDeleted}: WorkoutD
     const [error, setError] = useState<string>();
 
     const handleDelete = async () => {
-        const response = await ApiServices.DeleteById(workout._id)
+        const response = await WorkoutServices.DeleteById(workout._id)
 
         if (response instanceof Error) {
             setError(response.message)

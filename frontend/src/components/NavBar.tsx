@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router';
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { UserContext } from '@/context';
 
 export default function NavBar() {
 
@@ -8,8 +9,13 @@ export default function NavBar() {
     const router = useRouter()
     const isSignUpRoute = router.query.isSignUp === 'true'
 
+    const { user, setUser } = useContext(UserContext)
+
     const handleLogout = () => {
         localStorage.removeItem('user')
+        setIsSignUp(false)
+        setUser(null)
+        router.push(`/login?isSignUp=${isSignUp}`)
     }
 
     return (
@@ -19,17 +25,22 @@ export default function NavBar() {
                     <h1>Parceiro de Treino</h1>
                 </Link>
                 <nav>
-                    <div>
-                        <Link onClick={() => setIsSignUp(false)} href={{ pathname: '/login', query: { isSignUp } }} className={!isSignUpRoute && router.query.isSignUp ? 'active-page': ''}>
-                            Login
-                        </Link>
-                        <Link onClick={() => setIsSignUp(true)} href={{ pathname: '/login', query: { isSignUp } }} className={isSignUpRoute ? 'active-page': ''}>
-                            Cadastrar
-                        </Link>
-                    </div>
-                    <div>
-                        <button type='button' onClick={handleLogout}>Sair</button>
-                    </div>
+                    {!user &&
+                        <div>
+                            <Link onClick={() => setIsSignUp(false)} href={{ pathname: '/login', query: { isSignUp } }} className={!isSignUpRoute && router.query.isSignUp ? 'active-page': ''}>
+                                Login
+                            </Link>
+                            <Link onClick={() => setIsSignUp(true)} href={{ pathname: '/login', query: { isSignUp } }} className={isSignUpRoute ? 'active-page': ''}>
+                                Cadastrar
+                            </Link>
+                        </div>
+                    }
+                    {user && 
+                        <div>
+                            <span>{user.user.email}</span>
+                            <button type='submit' onClick={handleLogout}>Sair</button>
+                        </div>
+                    }
                 </nav>
             </div>
         </header>

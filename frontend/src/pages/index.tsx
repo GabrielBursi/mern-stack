@@ -1,9 +1,9 @@
 import { GetStaticProps } from "next"
 import { useState } from "react";
-import ApiServices from "@/services/api";
 import { IWorkout } from "@/types";
 import WorkoutDetails from "@/components/WorkoutDetails";
 import WorkoutForm from "@/components/WorkoutForm";
+import { WorkoutServices } from "@/services/api";
 
 interface HomeProps {
   workouts: IWorkout[],
@@ -16,7 +16,7 @@ export default function Home({workouts, hasError}: HomeProps) {
   const [error, setError] = useState(hasError);
 
   const handleWorkouts = async () => {
-    const updatedWorkouts = await ApiServices.GetAll();
+    const updatedWorkouts = await WorkoutServices.GetAll();
     if(updatedWorkouts instanceof Error){
       return setError(true)
     }
@@ -40,7 +40,7 @@ export default function Home({workouts, hasError}: HomeProps) {
 
 export const getStaticProps: GetStaticProps = async () => {
 
-  const workouts = await ApiServices.GetAll()
+  const workouts = await WorkoutServices.GetAll()
   const hasError = true
 
   if (workouts instanceof Error) {
