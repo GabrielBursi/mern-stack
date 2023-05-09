@@ -1,5 +1,5 @@
+import { Api } from "@/services/config";
 import { IWorkout } from "@/types";
-import { Api } from "../config";
 
 export const GetById = async (id: string): Promise<IWorkout | Error> => {
     try {

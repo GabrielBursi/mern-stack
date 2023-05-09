@@ -11,3 +11,13 @@ export interface IWorkout {
     load: number,
     createdAt: string
 }
+
+export interface IUser {
+    email: string,
+    password: string
+}
+
+export interface ApiDataUser {
+    accessToken: string,
+    user: IUser
+}

@@ -6,17 +6,17 @@ import { JWTService } from "../../shared/services"
 
 export const signupUser: RequestHandler = async (req: Request<{}, {}, IUser>, res) => {
 
-    const newUser = await UsersProviders.signup(req.body)
+    const user = await UsersProviders.signup(req.body)
 
-    if (newUser instanceof Error) {
+    if (user instanceof Error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
             errors: {
-                default: newUser.message
+                default: user.message
             }
         });
     }
 
-    const accessToken = JWTService.signIn({ _id: `${newUser._id}` });
+    const accessToken = JWTService.signIn({ _id: `${user._id}` });
     if (accessToken === 'JWT_SECRET_NOT_FOUND')
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
             errors: {
@@ -24,5 +24,5 @@ export const signupUser: RequestHandler = async (req: Request<{}, {}, IUser>, re
             },
         });
 
-    return res.status(StatusCodes.CREATED).json({accessToken, newUser})
+    return res.status(StatusCodes.CREATED).json({accessToken, user})
 }

@@ -8,6 +8,10 @@ export default function NavBar() {
     const router = useRouter()
     const isSignUpRoute = router.query.isSignUp === 'true'
 
+    const handleLogout = () => {
+        localStorage.removeItem('user')
+    }
+
     return (
         <header>
             <div className="container">
@@ -16,12 +20,15 @@ export default function NavBar() {
                 </Link>
                 <nav>
                     <div>
-                        <Link onClick={() => setIsSignUp(false)} href={{ pathname: '/login', query: { isSignUp } }} className={!isSignUpRoute ? 'active-page': ''}>
+                        <Link onClick={() => setIsSignUp(false)} href={{ pathname: '/login', query: { isSignUp } }} className={!isSignUpRoute && router.query.isSignUp ? 'active-page': ''}>
                             Login
                         </Link>
                         <Link onClick={() => setIsSignUp(true)} href={{ pathname: '/login', query: { isSignUp } }} className={isSignUpRoute ? 'active-page': ''}>
                             Cadastrar
                         </Link>
+                    </div>
+                    <div>
+                        <button type='button' onClick={handleLogout}>Sair</button>
                     </div>
                 </nav>
             </div>

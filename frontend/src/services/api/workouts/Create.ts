@@ -1,5 +1,5 @@
+import { Api } from "@/services/config"
 import { IWorkout } from "@/types"
-import { Api } from "../config"
 
 export const Create = async (workout: Omit<IWorkout, '_id' | 'createdAt'>): Promise<IWorkout | Error> => {
     try {
