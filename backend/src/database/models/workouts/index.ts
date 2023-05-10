@@ -1,7 +1,6 @@
 import { Schema, model } from "mongoose";
 import { IWorkout } from "../../../types";
 
-
 const workoutSchema = new Schema<IWorkout>({
     title: {
         type: String,
@@ -13,6 +12,10 @@ const workoutSchema = new Schema<IWorkout>({
     },
     load: {
         type: Number,
+        required: true
+    },
+    user_id: {
+        type: String,
         required: true
     }
 }, { timestamps: true })

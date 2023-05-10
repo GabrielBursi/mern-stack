@@ -5,8 +5,9 @@ import { IWorkout } from "../../types";
 
 export const Create: RequestHandler = async (req: Request<{}, {}, IWorkout>, res) => {
     const { title, load, reps } = req.body
+    const { user_id } = req.headers
 
-    const workout = await WorkoutsProviders.Create({title, load, reps})
+    const workout = await WorkoutsProviders.Create({title, load, reps, user_id })
 
     if(workout instanceof Error){
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({

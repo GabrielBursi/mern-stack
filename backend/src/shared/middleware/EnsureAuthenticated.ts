@@ -25,7 +25,7 @@ export const ensureAuthenticated: RequestHandler = (req, res, next) => {
         return res.status(StatusCodes.UNAUTHORIZED).json({ errors: { default: 'Não autorizado.' } })
     }
 
-    req.headers.idUser = jwtData._id.toString()
+    req.headers.user_id = jwtData._id.toString()
 
     return next()
 }

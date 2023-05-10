@@ -15,7 +15,7 @@ export const idWorkoutValidation = validation({
     params: paramsSchemaValidation,
 })
 
-const bodySchemaValidation: yup.ObjectSchema<IWorkout> = yup.object().shape({
+const bodySchemaValidation: yup.ObjectSchema<Omit<IWorkout, 'user_id'>> = yup.object().shape({
     title: yup.string().required(),
     load: yup.number().required(),
     reps: yup.number().required(),
