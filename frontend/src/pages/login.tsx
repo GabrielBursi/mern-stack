@@ -14,6 +14,12 @@ const Login = () => {
     const { setUser } = useContext(UserContext)
 
     useEffect(() => {
+
+        const user = localStorage.getItem('user')
+        if(user){
+            router.push('/')
+        }
+
         setEmail('')
         setPassword('')
         setError(null)
